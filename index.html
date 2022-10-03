@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://unpkg.com/vue@3"></script>
+    <title>Who pays the bill</title>
+</head>
+<body>
+    <div id="app">
+        <h2>Who pays the bill</h2>
+        <div id="mainComponent" v-if="!looser">
+            <form v-on:submit.prevent="addName">
+                <label>Name: </label>
+                <input type="text"  placeholder="Enter name" v-model="formData.name"/>
+                <button class="customButton" type="submit">
+                    Submit
+                </button>
+            </form>
+            
+            <div id="error_message" v-if="error_mes">
+                {{ error_mes }}
+            </div>
+            <div>
+                <div class="namesDiv" v-for="item in names">
+                    <button class="itemButton" @click="removeName(item)">
+                        {{ item }}
+                    </button>
+                </div>
+            </div>
+    
+            <div v-if="names.length > 1">
+                <button class="customButton" @click="chooseLooser">
+                    Choose a looser
+                </button>
+            </div>
+        </div>
+
+        <div id = "result" v-else>
+            The looser is <b>{{ looser }} </b> !
+
+            <button class="customButton" @click="startOver">
+                Start over
+            </button>
+
+            <button class="customButton" @click="getAnotherName">
+                Don`t like it, get a new name
+            </button>
+        </div>
+    </div>
+</body>
+<script src="js/app.js"></script>
+</html>
